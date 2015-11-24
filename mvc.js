@@ -2,7 +2,7 @@
 //body showing results as table data
 
 var request = {
-  apiUrl: "http://localhost:3000/rankings/20150508/apps?",
+  apiUrl: "http://app-store-mongoid.herokuapp.com/rankings/20150508/apps?",
   data: null,
   reqHeader: function(xhr){
     xhr.setRequestHeader("Content-Type", "application/json");
