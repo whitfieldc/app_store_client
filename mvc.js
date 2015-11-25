@@ -20,9 +20,9 @@ var request = {
 var Menu = {
   view: function(){
     return[
-      btn("Paid", "/paid", "type=paid&limit=40&sort=downloads"),
-      btn("Free", "/free", "type=free&limit=40&sort=downloads"),
-      btn("Top Grossing", "/top-grossing", "type=all&limit=40&sort=revenue")
+      btn("Paid", "/paid", "type=paid&limit=400&sort=downloads"),
+      btn("Free", "/free", "type=free&limit=400&sort=downloads"),
+      btn("Top Grossing", "/top-grossing", "type=all&limit=400&sort=revenue")
     ];
 
     function btn(name, route, query){
@@ -43,8 +43,35 @@ function PageView(){
     var data = request.data
     if (data){
       console.log(data)
-      return [ Menu.view(), m("hr"), m("div", data.map(function(app){
-        return m("h3", app.name);
+      return [ Menu.view(), m("hr"), m("div", data.map(function(app, index){
+        return [
+          m("img",{src: app.icon_url}),
+          m("h4", app.name),
+          m("table", [
+            m("tr", [
+              m("h5", app.publisher)
+            ]),
+            m("tr", [
+              m("td", "Rank:"),
+              m("td", (index+1))
+            ]),
+            m("tr", [
+              m("td", "Global ratings:"),
+              m("td", app.global_ratings)
+            ]),
+            m("tr", [
+              m("td", "In-country ratings:"),
+              m("td", app.in_country_ratings)
+            ]),
+            m("tr", [
+              m("td", "Price:"),
+              m("td", ((app.price > 0) ? "$"+app.price : "Free"))
+            ]),
+            m("tr", [
+              m("a", {href: app.link}, "View on app store")
+            ]),
+          ])
+        ];
       }))]
     } else {
       return [Menu.view(), m("hr"), m("h4", "Problem retrieving data")]
