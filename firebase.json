@@ -1,0 +1,9 @@
+{
+  "firebase": "app-rankings-client",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
